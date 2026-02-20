@@ -25,12 +25,12 @@
 	       
 
 	        JLabel tag_tittle = new JLabel();
-	        tag_tittle.setText("Bien");
+	        tag_tittle.setText("Bienvenido");
 	        tag_tittle.setSize(100, 40);
 	        tag_tittle.setLocation(175, 50);
 	        tag_tittle.setBackground(Color.white);
 	        tag_tittle.setOpaque(true);
-	        tag_tittle.setFont(new Font("Arial", Font.PLAIN, 22));
+	        tag_tittle.setFont(new Font("Arial", Font.PLAIN, 17));
 	        tag_tittle.setHorizontalAlignment(JLabel.CENTER);
 	        this.add(tag_tittle);
 
