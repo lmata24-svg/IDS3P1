@@ -1,9 +1,9 @@
-
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-
+import java.awt.Image;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -21,65 +21,55 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class Ventana extends JFrame{
+public class Ventana extends JFrame {
 
 	public Ventana() {
 
-		//CONFIGURACIONES BÁSICAS
-		this.setVisible(true);
-		this.setSize(1000, 500);
 		this.setSize(1000, 600);
-		//this.setLocation(200, 200);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setMinimumSize(new Dimension(200,200));
-		this.setMaximumSize(new Dimension(1000,800));
+		this.setMinimumSize(new Dimension(200, 200));
+		this.setMaximumSize(new Dimension(1000, 800));
 		this.setLocationRelativeTo(null);
 		this.setTitle("Hola");
 		this.setLayout(null);
-		//this.setBackground(Color.red);
-		//this.setOpacity(1);
 		this.getContentPane().setBackground(Color.black);
-		//this.setBounds(200,200,500,500);
-		
+
+		try {
+			Image iconImage = ImageIO.read(getClass().getResource("/buho/buho.png"));
+			this.setIconImage(iconImage);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		JMenuBar barra = new JMenuBar();
-		
 		JMenu menu1 = new JMenu("Archivo");
 		barra.add(menu1);
-		
+
 		JMenuItem opt1 = new JMenuItem("Abrir");
 		menu1.add(opt1);
-		
 		JMenuItem opt2 = new JMenuItem("Nuevo");
 		menu1.add(opt2);
-		
 		JMenuItem opt3 = new JMenuItem("Cerrar");
 		menu1.add(opt3);
-		
+
 		menu1.addSeparator();
-		
+
 		JMenu menu2 = new JMenu("Guardar");
 		menu1.add(menu2);
-		
 		JMenuItem opt4 = new JMenuItem("Abrir");
 		menu2.add(opt4);
-		
 		JMenuItem opt5 = new JMenuItem("Nuevo");
 		menu2.add(opt5);
-		
-		
+
 		this.setJMenuBar(barra);
 
-		//this.login();
-		//this.registro();
 		this.users();
 
 		this.setVisible(true);
 		this.repaint();
-
 	}
 
-	public void login()
-	{
+	public void login() {
 		JPanel login_container = new JPanel();
 		login_container.setSize(400, 400);
 		login_container.setLocation(50, 50);
@@ -87,20 +77,19 @@ public class Ventana extends JFrame{
 		login_container.setLayout(null);
 		this.add(login_container);
 
-		//AÑADIENDO ELEMENTOS
 		JLabel tag_title = new JLabel();
 		tag_title.setText("Bienvenido");
 		tag_title.setSize(150, 30);
-		tag_title.setLocation(125,20);
+		tag_title.setLocation(125, 20);
 		tag_title.setBackground(Color.white);
 		tag_title.setOpaque(true);
-		tag_title.setFont(new Font("Arial",Font.PLAIN,22));
+		tag_title.setFont(new Font("Arial", Font.PLAIN, 22));
 		tag_title.setVerticalAlignment(JLabel.CENTER);
 		tag_title.setHorizontalAlignment(JLabel.CENTER);
 		login_container.add(tag_title);
 
 		JLabel tag_email = new JLabel("Correo electrónico");
-		tag_email.setBounds(61,120,150, 30); 
+		tag_email.setBounds(61, 120, 150, 30);
 		tag_email.setBackground(Color.white);
 		tag_email.setOpaque(true);
 		login_container.add(tag_email);
@@ -111,7 +100,7 @@ public class Ventana extends JFrame{
 		login_container.add(email_input);
 
 		JLabel tag_password = new JLabel("Contraseña");
-		tag_password.setBounds(61,200,150, 30); 
+		tag_password.setBounds(61, 200, 150, 30);
 		tag_password.setBackground(Color.white);
 		tag_password.setOpaque(true);
 		login_container.add(tag_password);
@@ -123,19 +112,17 @@ public class Ventana extends JFrame{
 
 		JCheckBox rememberme = new JCheckBox("Hola");
 		rememberme.setSize(140, 40);
-		rememberme.setLocation(60, 300); 
-		//rememberme.setOpaque(false); 
+		rememberme.setLocation(60, 300);
 		login_container.add(rememberme);
 
 		JButton access_btn = new JButton();
-		access_btn.setText("Acceder"); 
+		access_btn.setText("Acceder");
 		access_btn.setBounds(100, 350, 200, 40);
-		access_btn.setFont(new Font("Arial",Font.ITALIC,18));
+		access_btn.setFont(new Font("Arial", Font.ITALIC, 18));
 		login_container.add(access_btn);
 	}
 
 	public void registro() {
-
 		JPanel rgs_container = new JPanel();
 		rgs_container.setBounds(500, 50, 400, 400);
 		rgs_container.setOpaque(true);
@@ -143,23 +130,16 @@ public class Ventana extends JFrame{
 		rgs_container.setLayout(null);
 		this.add(rgs_container);
 
-		//titulo 
-
-		//label name
-		//input name
-
 		JLabel bio_tag = new JLabel("BIO");
-		bio_tag.setBounds(50,50,300,40);
+		bio_tag.setBounds(50, 50, 300, 40);
 		bio_tag.setHorizontalAlignment(JLabel.CENTER);
 		bio_tag.setOpaque(true);
 		rgs_container.add(bio_tag);
 
 		JTextArea bio_text = new JTextArea();
 		bio_text.setLocation(50, 100);
-		bio_text.setSize(300,80);
+		bio_text.setSize(300, 80);
 		rgs_container.add(bio_text);
-
-		//label preferences
 
 		JCheckBox opt_sweet = new JCheckBox("Dulce");
 		opt_sweet.setBounds(50, 200, 100, 40);
@@ -175,8 +155,6 @@ public class Ventana extends JFrame{
 		opt_healty.setBounds(250, 200, 100, 40);
 		rgs_container.add(opt_healty);
 
-
-		//label terms 
 		JRadioButton accept_terms = new JRadioButton("Acepto los términos");
 		accept_terms.setBounds(50, 260, 180, 40);
 		rgs_container.add(accept_terms);
@@ -187,52 +165,40 @@ public class Ventana extends JFrame{
 
 		ButtonGroup terms = new ButtonGroup();
 		terms.add(accept_terms);
-		terms.add(reject_terms); 
+		terms.add(reject_terms);
 
-		//combo 
-		String [] colonias = {"Camino real","Arcoiris","Villas del encanto","8 de octubre"};
-
+		String[] colonias = { "Camino real", "Arcoiris", "Villas del encanto", "8 de octubre" };
 		JComboBox colonias_combo = new JComboBox(colonias);
 		colonias_combo.setBounds(50, 300, 300, 50);
-
-		rgs_container.add(colonias_combo); 
+		rgs_container.add(colonias_combo);
 
 		JButton register_btn = new JButton("Crear cuenta");
 		register_btn.setBounds(50, 340, 300, 60);
 		rgs_container.add(register_btn);
 	}
 
-	public void users()
-	{
-		
+	public void users() {
 		JPanel panel_users = new JPanel();
 		panel_users.setSize(900, 500);
 		panel_users.setLocation(50, 50);
 		panel_users.setBackground(Color.decode("#DDDEA6"));
 		panel_users.setLayout(null);
 		this.add(panel_users);
-		
-		String [] table_head = {"No. Control","Nombre","Apellidos","Correo electrónico","Semestre","Carrera","Acciones"};
-		
-		Object [][] table_body = {
-			    {"20231001","Carlos","Ramírez López","carlos.ramirez@correo.com","3","Ingeniería en Sistemas Computacionales","Editar"},
-			    {"20231002","María","González Pérez","maria.gonzalez@correo.com","5","Ingeniería Industrial","Editar"},
-			    {"20231003","Luis","Hernández Torres","luis.hernandez@correo.com","1","Licenciatura en Administración","Editar"},
-			    {"20231004","Ana","Martínez Ruiz","ana.martinez@correo.com","7","Ingeniería Civil","Editar"},
-			    {"20231005","Jorge","Sánchez Morales","jorge.sanchez@correo.com","4","Ingeniería Mecatrónica","Editar"},
-			    {"20231006","Fernanda","Castillo Díaz","fernanda.castillo@correo.com","2","Licenciatura en Psicología","Editar"},
-			    {"20231007","Diego","Vargas Romero","diego.vargas@correo.com","6","Ingeniería en Tecnologías de la Información","Editar"}
-			};
-		
-		JTable studens = new JTable(table_body,table_head);
-		
+
+		String[] table_head = { "No. Control", "Nombre", "Apellidos", "Correo electrónico", "Semestre", "Carrera", "Acciones" };
+		Object[][] table_body = {
+				{ "20231001", "Carlos", "Ramírez López", "carlos.ramirez@correo.com", "3", "Ingeniería en Sistemas", "Editar" },
+				{ "20231002", "María", "González Pérez", "maria.gonzalez@correo.com", "5", "Ingeniería Industrial", "Editar" },
+				{ "20231003", "Luis", "Hernández Torres", "luis.hernandez@correo.com", "1", "Administración", "Editar" },
+				{ "20231004", "Ana", "Martínez Ruiz", "ana.martinez@correo.com", "7", "Ingeniería Civil", "Editar" }
+		};
+
+		JTable studens = new JTable(table_body, table_head);
 		JScrollPane final_table = new JScrollPane(studens);
-		final_table.setSize(700,150);
+		final_table.setSize(700, 150);
 		final_table.setLocation(100, 100);
-		
+
 		panel_users.add(final_table);
-		
 		panel_users.repaint();
 	}
-
 }
