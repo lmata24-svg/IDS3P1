@@ -1,105 +1,238 @@
+
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Cursor;
-import javax.swing.BorderFactory; 
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox; 
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 
-public class Ventana extends JFrame {
+public class Ventana extends JFrame{
 
-    public Ventana() {
-        // --- Configuración de la Ventana Principal ---
-        this.setTitle("Sistema de Acceso");
-        this.setSize(850, 550); // Aumenté el ancho para que quepan los dos paneles
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setLayout(null);
-        this.getContentPane().setBackground(new Color(240, 242, 245));
+	public Ventana() {
 
-        // ================= PANEL DE LOGIN (IZQUIERDA) =================
-        JPanel login_container = new JPanel();
-        login_container.setSize(350, 420);
-        login_container.setLocation(25, 40);
-        login_container.setBackground(Color.WHITE);
-        login_container.setLayout(null);
-        login_container.setBorder(new LineBorder(new Color(200, 200, 200), 1));
-        this.add(login_container);
+		//CONFIGURACIONES BÁSICAS
+		this.setVisible(true);
+		this.setSize(1000, 500);
+		this.setSize(1000, 600);
+		//this.setLocation(200, 200);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setMinimumSize(new Dimension(200,200));
+		this.setMaximumSize(new Dimension(1000,800));
+		this.setLocationRelativeTo(null);
+		this.setTitle("Hola");
+		this.setLayout(null);
+		//this.setBackground(Color.red);
+		//this.setOpacity(1);
+		this.getContentPane().setBackground(Color.black);
+		//this.setBounds(200,200,500,500);
+		
+		JMenuBar barra = new JMenuBar();
+		
+		JMenu menu1 = new JMenu("Archivo");
+		barra.add(menu1);
+		
+		JMenuItem opt1 = new JMenuItem("Abrir");
+		menu1.add(opt1);
+		
+		JMenuItem opt2 = new JMenuItem("Nuevo");
+		menu1.add(opt2);
+		
+		JMenuItem opt3 = new JMenuItem("Cerrar");
+		menu1.add(opt3);
+		
+		menu1.addSeparator();
+		
+		JMenu menu2 = new JMenu("Guardar");
+		menu1.add(menu2);
+		
+		JMenuItem opt4 = new JMenuItem("Abrir");
+		menu2.add(opt4);
+		
+		JMenuItem opt5 = new JMenuItem("Nuevo");
+		menu2.add(opt5);
+		
+		
+		this.setJMenuBar(barra);
 
-        JLabel tag_tittle = new JLabel("BIENVENIDO");
-        tag_tittle.setBounds(0, 20, 350, 60);
-        tag_tittle.setForeground(new Color(44, 62, 80));
-        tag_tittle.setFont(new Font("Segoe UI", Font.BOLD, 26));
-        tag_tittle.setHorizontalAlignment(SwingConstants.CENTER);
-        login_container.add(tag_tittle);
+		//this.login();
+		//this.registro();
+		this.users();
 
-        JLabel usuario = new JLabel("Correo Electrónico");
-        usuario.setBounds(40, 90, 270, 20);
-        usuario.setFont(new Font("Segoe UI", Font.BOLD, 12));
-        login_container.add(usuario);
+		this.setVisible(true);
+		this.repaint();
 
-        JTextField email_input = new JTextField();
-        email_input.setBounds(40, 115, 270, 35);
-        login_container.add(email_input);
+	}
 
-        JLabel password = new JLabel("Contraseña");
-        password.setBounds(40, 170, 270, 20);
-        password.setFont(new Font("Segoe UI", Font.BOLD, 12));
-        login_container.add(password);
+	public void login()
+	{
+		JPanel login_container = new JPanel();
+		login_container.setSize(400, 400);
+		login_container.setLocation(50, 50);
+		login_container.setBackground(Color.decode("#B979E8"));
+		login_container.setLayout(null);
+		this.add(login_container);
 
-        JPasswordField password_input = new JPasswordField();
-        password_input.setBounds(40, 195, 270, 35);
-        login_container.add(password_input);
+		//AÑADIENDO ELEMENTOS
+		JLabel tag_title = new JLabel();
+		tag_title.setText("Bienvenido");
+		tag_title.setSize(150, 30);
+		tag_title.setLocation(125,20);
+		tag_title.setBackground(Color.white);
+		tag_title.setOpaque(true);
+		tag_title.setFont(new Font("Arial",Font.PLAIN,22));
+		tag_title.setVerticalAlignment(JLabel.CENTER);
+		tag_title.setHorizontalAlignment(JLabel.CENTER);
+		login_container.add(tag_title);
 
-        JCheckBox rememberme = new JCheckBox("Recordarme");
-        rememberme.setBounds(40, 240, 150, 30);
-        rememberme.setBackground(Color.WHITE);
-        login_container.add(rememberme);
+		JLabel tag_email = new JLabel("Correo electrónico");
+		tag_email.setBounds(61,120,150, 30); 
+		tag_email.setBackground(Color.white);
+		tag_email.setOpaque(true);
+		login_container.add(tag_email);
 
-        JButton acces_btn = new JButton("ACCEDER");
-        acces_btn.setBounds(40, 300, 270, 45);
-        acces_btn.setBackground(new Color(52, 152, 219));
-        acces_btn.setForeground(Color.WHITE);
-        acces_btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        login_container.add(acces_btn);
+		JTextField email_input = new JTextField();
+		email_input.setSize(280, 40);
+		email_input.setLocation(60, 150);
+		login_container.add(email_input);
 
-       
-        JPanel rgs_container = new JPanel(); 
-        rgs_container.setBounds(410, 20, 380, 470);
-        rgs_container.setBackground(new Color(25, 42, 86));
-        rgs_container.setLayout(null);
-        this.add(rgs_container);
+		JLabel tag_password = new JLabel("Contraseña");
+		tag_password.setBounds(61,200,150, 30); 
+		tag_password.setBackground(Color.white);
+		tag_password.setOpaque(true);
+		login_container.add(tag_password);
 
-        JLabel tituloRegistro = new JLabel("REGISTRO");
-        tituloRegistro.setBounds(80, 15, 220, 40);
-        tituloRegistro.setHorizontalAlignment(SwingConstants.CENTER);
-        tituloRegistro.setOpaque(true);
-        tituloRegistro.setBackground(new Color(30, 30, 30));
-        tituloRegistro.setForeground(Color.WHITE);
-        tituloRegistro.setFont(new Font("Arial", Font.BOLD, 22));
-        rgs_container.add(tituloRegistro);
+		JPasswordField password = new JPasswordField();
+		password.setSize(280, 40);
+		password.setLocation(60, 230);
+		login_container.add(password);
 
-        JTextField txtNombreReg = new JTextField();
-        txtNombreReg.setBounds(40, 80, 300, 30);
-        txtNombreReg.setBorder(BorderFactory.createTitledBorder("Nombre de Usuario"));
-        rgs_container.add(txtNombreReg);
+		JCheckBox rememberme = new JCheckBox("Hola");
+		rememberme.setSize(140, 40);
+		rememberme.setLocation(60, 300); 
+		//rememberme.setOpaque(false); 
+		login_container.add(rememberme);
 
-        JTextArea bio_text = new JTextArea();
-        bio_text.setBounds(40, 130, 300, 60);
-        bio_text.setBorder(BorderFactory.createTitledBorder("Biografía"));
-        
-        this.setVisible(true);
-        this.repaint();
-    }
+		JButton access_btn = new JButton();
+		access_btn.setText("Acceder"); 
+		access_btn.setBounds(100, 350, 200, 40);
+		access_btn.setFont(new Font("Arial",Font.ITALIC,18));
+		login_container.add(access_btn);
+	}
+
+	public void registro() {
+
+		JPanel rgs_container = new JPanel();
+		rgs_container.setBounds(500, 50, 400, 400);
+		rgs_container.setOpaque(true);
+		rgs_container.setBackground(Color.green);
+		rgs_container.setLayout(null);
+		this.add(rgs_container);
+
+		//titulo 
+
+		//label name
+		//input name
+
+		JLabel bio_tag = new JLabel("BIO");
+		bio_tag.setBounds(50,50,300,40);
+		bio_tag.setHorizontalAlignment(JLabel.CENTER);
+		bio_tag.setOpaque(true);
+		rgs_container.add(bio_tag);
+
+		JTextArea bio_text = new JTextArea();
+		bio_text.setLocation(50, 100);
+		bio_text.setSize(300,80);
+		rgs_container.add(bio_text);
+
+		//label preferences
+
+		JCheckBox opt_sweet = new JCheckBox("Dulce");
+		opt_sweet.setBounds(50, 200, 100, 40);
+		opt_sweet.setOpaque(true);
+		opt_sweet.setForeground(Color.red);
+		rgs_container.add(opt_sweet);
+
+		JCheckBox opt_salty = new JCheckBox("Salado");
+		opt_salty.setBounds(150, 200, 100, 40);
+		rgs_container.add(opt_salty);
+
+		JCheckBox opt_healty = new JCheckBox("Saludable");
+		opt_healty.setBounds(250, 200, 100, 40);
+		rgs_container.add(opt_healty);
+
+
+		//label terms 
+		JRadioButton accept_terms = new JRadioButton("Acepto los términos");
+		accept_terms.setBounds(50, 260, 180, 40);
+		rgs_container.add(accept_terms);
+
+		JRadioButton reject_terms = new JRadioButton("Rechazo los términos");
+		reject_terms.setBounds(220, 260, 200, 40);
+		rgs_container.add(reject_terms);
+
+		ButtonGroup terms = new ButtonGroup();
+		terms.add(accept_terms);
+		terms.add(reject_terms); 
+
+		//combo 
+		String [] colonias = {"Camino real","Arcoiris","Villas del encanto","8 de octubre"};
+
+		JComboBox colonias_combo = new JComboBox(colonias);
+		colonias_combo.setBounds(50, 300, 300, 50);
+
+		rgs_container.add(colonias_combo); 
+
+		JButton register_btn = new JButton("Crear cuenta");
+		register_btn.setBounds(50, 340, 300, 60);
+		rgs_container.add(register_btn);
+	}
+
+	public void users()
+	{
+		
+		JPanel panel_users = new JPanel();
+		panel_users.setSize(900, 500);
+		panel_users.setLocation(50, 50);
+		panel_users.setBackground(Color.decode("#DDDEA6"));
+		panel_users.setLayout(null);
+		this.add(panel_users);
+		
+		String [] table_head = {"No. Control","Nombre","Apellidos","Correo electrónico","Semestre","Carrera","Acciones"};
+		
+		Object [][] table_body = {
+			    {"20231001","Carlos","Ramírez López","carlos.ramirez@correo.com","3","Ingeniería en Sistemas Computacionales","Editar"},
+			    {"20231002","María","González Pérez","maria.gonzalez@correo.com","5","Ingeniería Industrial","Editar"},
+			    {"20231003","Luis","Hernández Torres","luis.hernandez@correo.com","1","Licenciatura en Administración","Editar"},
+			    {"20231004","Ana","Martínez Ruiz","ana.martinez@correo.com","7","Ingeniería Civil","Editar"},
+			    {"20231005","Jorge","Sánchez Morales","jorge.sanchez@correo.com","4","Ingeniería Mecatrónica","Editar"},
+			    {"20231006","Fernanda","Castillo Díaz","fernanda.castillo@correo.com","2","Licenciatura en Psicología","Editar"},
+			    {"20231007","Diego","Vargas Romero","diego.vargas@correo.com","6","Ingeniería en Tecnologías de la Información","Editar"}
+			};
+		
+		JTable studens = new JTable(table_body,table_head);
+		
+		JScrollPane final_table = new JScrollPane(studens);
+		final_table.setSize(700,150);
+		final_table.setLocation(100, 100);
+		
+		panel_users.add(final_table);
+		
+		panel_users.repaint();
+	}
+
 }
