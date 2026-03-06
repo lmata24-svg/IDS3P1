@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -28,7 +29,7 @@ public class Ventana extends JFrame {
 		this.setSize(1000, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setMinimumSize(new Dimension(200, 200));
-		this.setMaximumSize(new Dimension(1000, 800));
+		this.setMaximumSize(new Dimension(900, 700));
 		this.setLocationRelativeTo(null);
 		this.setTitle("Hola");
 		this.setLayout(null);
@@ -63,7 +64,8 @@ public class Ventana extends JFrame {
 
 		this.setJMenuBar(barra);
 
-		this.users();
+		/*this.users();*/
+		this.calculadora();
 
 		this.setVisible(true);
 		this.repaint();
@@ -149,10 +151,13 @@ public class Ventana extends JFrame {
 
 		JCheckBox opt_salty = new JCheckBox("Salado");
 		opt_salty.setBounds(150, 200, 100, 40);
+		opt_salty.setOpaque(true);
+		opt_salty.setForeground(Color.black);
 		rgs_container.add(opt_salty);
 
 		JCheckBox opt_healty = new JCheckBox("Saludable");
 		opt_healty.setBounds(250, 200, 100, 40);
+		opt_healty.setOpaque(true);
 		rgs_container.add(opt_healty);
 
 		JRadioButton accept_terms = new JRadioButton("Acepto los términos");
@@ -177,7 +182,7 @@ public class Ventana extends JFrame {
 		rgs_container.add(register_btn);
 	}
 
-	public void users() {
+	/*public void users() {
 		JPanel panel_users = new JPanel();
 		panel_users.setSize(900, 500);
 		panel_users.setLocation(50, 50);
@@ -200,5 +205,40 @@ public class Ventana extends JFrame {
 
 		panel_users.add(final_table);
 		panel_users.repaint();
+	}*/
+
+	public void calculadora() {
+		JPanel panel_calc = new JPanel();
+		panel_calc.setSize(500, 500);
+		panel_calc.setLocation(250, 50);
+		panel_calc.setBackground(Color.decode("#2C3E50"));
+		panel_calc.setLayout(null);
+		this.add(panel_calc);
+
+		JLabel field = new JLabel("770.00");
+		field.setSize(480, 40);
+		field.setLocation(10, 10);
+		field.setOpaque(true);
+		field.setBackground(Color.white);
+		field.setFont(new Font("Arial", Font.BOLD, 22));
+		field.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+		panel_calc.add(field);
+		
+		int cor_x = 10, cor_y = 60;
+		String [] botones = {"CE", "C", "%", "/", "7", "8", "9", "*", "4", "5", "6", "-", "1", "2", "3", "+", "0", ".", "="};
+		
+		for (int i = 0; i < botones.length; i++) {
+			JButton btn = new JButton(botones[i]);
+			btn.setSize(110, 80);
+			btn.setLocation(cor_x, cor_y);
+			panel_calc.add(btn);
+			
+			cor_x += 120;
+			
+			if (cor_x >= 480) {
+				cor_x = 10;
+				cor_y += 90;
+			}
+		}
 	}
 }
