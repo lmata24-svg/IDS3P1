@@ -1,6 +1,8 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -64,8 +66,7 @@ public class Ventana extends JFrame {
 
 		this.setJMenuBar(barra);
 
-		/*this.users();*/
-		this.calculadora();
+		this.calculadora_layout();
 
 		this.setVisible(true);
 		this.repaint();
@@ -182,7 +183,7 @@ public class Ventana extends JFrame {
 		rgs_container.add(register_btn);
 	}
 
-	/*public void users() {
+	public void users() {
 		JPanel panel_users = new JPanel();
 		panel_users.setSize(900, 500);
 		panel_users.setLocation(50, 50);
@@ -193,9 +194,7 @@ public class Ventana extends JFrame {
 		String[] table_head = { "No. Control", "Nombre", "Apellidos", "Correo electrónico", "Semestre", "Carrera", "Acciones" };
 		Object[][] table_body = {
 				{ "20231001", "Carlos", "Ramírez López", "carlos.ramirez@correo.com", "3", "Ingeniería en Sistemas", "Editar" },
-				{ "20231002", "María", "González Pérez", "maria.gonzalez@correo.com", "5", "Ingeniería Industrial", "Editar" },
-				{ "20231003", "Luis", "Hernández Torres", "luis.hernandez@correo.com", "1", "Administración", "Editar" },
-				{ "20231004", "Ana", "Martínez Ruiz", "ana.martinez@correo.com", "7", "Ingeniería Civil", "Editar" }
+				{ "20231002", "María", "González Pérez", "maria.gonzalez@correo.com", "5", "Ingeniería Industrial", "Editar" }
 		};
 
 		JTable studens = new JTable(table_body, table_head);
@@ -205,40 +204,54 @@ public class Ventana extends JFrame {
 
 		panel_users.add(final_table);
 		panel_users.repaint();
-	}*/
+	}
 
-	public void calculadora() {
-		JPanel panel_calc = new JPanel();
-		panel_calc.setSize(500, 500);
-		panel_calc.setLocation(250, 50);
-		panel_calc.setBackground(Color.decode("#2C3E50"));
-		panel_calc.setLayout(null);
-		this.add(panel_calc);
+	public void calculadora_layout() {
 
-		JLabel field = new JLabel("770.00");
-		field.setSize(480, 40);
-		field.setLocation(10, 10);
+		JPanel panel_users = new JPanel();
+		panel_users.setSize(500, 500);
+		panel_users.setLocation(250, 50);
+		panel_users.setBackground(Color.decode("#2C3E50"));
+
+		BorderLayout mi_layout1 = new BorderLayout();
+		mi_layout1.setVgap(10);
+		mi_layout1.setHgap(10);
+
+		panel_users.setLayout(mi_layout1);
+		this.add(panel_users);
+
+		JLabel field = new JLabel("180.00");
 		field.setOpaque(true);
 		field.setBackground(Color.white);
 		field.setFont(new Font("Arial", Font.BOLD, 22));
 		field.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-		panel_calc.add(field);
-		
-		int cor_x = 10, cor_y = 60;
-		String [] botones = {"CE", "C", "%", "/", "7", "8", "9", "*", "4", "5", "6", "-", "1", "2", "3", "+", "0", ".", "="};
-		
-		for (int i = 0; i < botones.length; i++) {
-			JButton btn = new JButton(botones[i]);
-			btn.setSize(110, 80);
-			btn.setLocation(cor_x, cor_y);
-			panel_calc.add(btn);
-			
-			cor_x += 120;
-			
-			if (cor_x >= 480) {
-				cor_x = 10;
-				cor_y += 90;
-			}
+		panel_users.add(field, BorderLayout.NORTH);
+
+		JPanel centro = new JPanel();
+		centro.setBackground(Color.decode("#2D2D30"));
+		centro.setLayout(new GridLayout(4, 3, 5, 5));
+		panel_users.add(centro, BorderLayout.CENTER);
+
+		String[] botones = {"7", "8", "9", "4", "5", "6", "1", "2", "3", "0", ".", "C"};
+		for (String texto : botones) {
+			JButton btn = new JButton(texto);
+			btn.setFont(new Font("Arial", Font.BOLD, 18));
+			centro.add(btn);
 		}
+
+		JPanel sidebar = new JPanel();
+		sidebar.setBackground(Color.decode("#2D2D30"));
+		sidebar.setLayout(new GridLayout(6, 1, 5, 5));
+		panel_users.add(sidebar, BorderLayout.EAST);
+
+		String[] botones2 = {"+", "-", "x", "/", "=", "CE"};
+		for (int i = 0; i < botones2.length; i++) {
+			JButton ce = new JButton(botones2[i]);
+			ce.setFont(new Font("Arial", Font.BOLD, 22));
+			sidebar.add(ce);
+		}
+		
+		this.repaint();
+		this.revalidate();
 	}
 }
