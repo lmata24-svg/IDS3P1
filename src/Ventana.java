@@ -1,13 +1,22 @@
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -65,8 +74,8 @@ public class Ventana extends JFrame {
 		menu2.add(opt5);
 
 		this.setJMenuBar(barra);
-
-		this.calculadora_layout();
+		
+		this.pintar();
 
 		this.setVisible(true);
 		this.repaint();
@@ -253,5 +262,152 @@ public class Ventana extends JFrame {
 		
 		this.repaint();
 		this.revalidate();
+	}
+	
+	public void intereses() {
+
+		this.getContentPane().setLayout(new BorderLayout());
+
+		JLabel titulo = new JLabel("Calcular interes");
+		titulo.setHorizontalAlignment(JLabel.CENTER);
+		this.add(titulo, BorderLayout.NORTH);
+
+		JPanel datos = new JPanel();
+		datos.setBackground(Color.decode("#A8E6A3"));
+		datos.setLayout(new GridLayout(4,2));
+		datos.setBorder(BorderFactory.createTitledBorder("Calcular interes"));
+
+		JLabel capital = new JLabel("Capital:");
+		JTextField txtCapital = new JTextField();
+
+		JLabel tiempo = new JLabel("Tiempo:");
+		JTextField txtTiempo = new JTextField();
+
+		JLabel tasa = new JLabel("Tasa interes:");
+		JTextField txtTasa = new JTextField();
+
+		datos.add(capital);
+		datos.add(txtCapital);
+		datos.add(tiempo);
+		datos.add(txtTiempo);
+		datos.add(tasa);
+		datos.add(txtTasa);
+
+		JPanel botones = new JPanel();
+		botones.setLayout(new FlowLayout());
+
+		JButton calcular = new JButton("Calcular");
+		JButton cancelar = new JButton("Cancelar");
+
+		botones.add(calcular);
+		botones.add(cancelar);
+
+		datos.add(botones);
+
+		this.add(datos, BorderLayout.CENTER);
+
+		JPanel resultados = new JPanel();
+		resultados.setBackground(new Color(255, 200, 200));
+		resultados.setLayout(new GridLayout(2,2));
+		resultados.setBorder(BorderFactory.createTitledBorder("Resultados"));
+
+		JLabel interes = new JLabel("Interes:");
+		JTextField txtInteres = new JTextField();
+		txtInteres.setEditable(false);
+
+		JLabel monto = new JLabel("Monto:");
+		JTextField txtMonto = new JTextField();
+		txtMonto.setEditable(false);
+
+		resultados.add(interes);
+		resultados.add(txtInteres);
+		resultados.add(monto);
+		resultados.add(txtMonto);
+
+		this.add(resultados, BorderLayout.SOUTH);
+
+		calcular.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				double c = Double.parseDouble(txtCapital.getText());
+				double t = Double.parseDouble(txtTiempo.getText());
+				double r = Double.parseDouble(txtTasa.getText());
+
+				double i = c * r * t;
+				double m = c + i;
+
+				txtInteres.setText("" + i);
+				txtMonto.setText("" + m);
+			}
+		});
+
+		cancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtCapital.setText("");
+				txtTiempo.setText("");
+				txtTasa.setText("");
+				txtInteres.setText("");
+				txtMonto.setText("");
+			}
+		});
+	}
+	
+	public void pintar() {
+		JPanel pane = new JPanel() {
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            
+            Graphics2D g2d = (Graphics2D) g;
+            
+            g.drawLine(0, 0, 1000, 600);
+            
+            g2d.setStroke(new BasicStroke(5));
+            g2d.setColor(Color.MAGENTA);
+            g2d.drawOval(100, 100, 150, 50);
+            
+            g2d.setStroke(new BasicStroke(7));
+            g2d.setColor(Color.GREEN);
+            g2d.drawPolygon(new int[] {300,100,400}, new int[] {100,300,200},3);
+            
+            g2d.setColor(Color.CYAN);
+            g2d.drawRect(250, 270, 100, 100);
+            
+            g2d.setColor(Color.ORANGE);
+            g2d.drawRoundRect(400, 150, 100, 100, 10, 10);
+            
+            g2d.setColor(Color.RED);
+            g2d.drawArc(700, 300, 150, 150, 0, 360);
+            
+            g2d.setFont(new Font("Arial",Font.BOLD,22));
+            g2d.drawString("hola", 100, 100);
+            
+            g2d.setColor(Color.BLUE);
+            g2d.fillOval(500, 100, 150, 50);
+            
+            g2d.setColor(Color.PINK);
+            g2d.fillPolygon(new int[] {500,300,700}, new int[] {300,400,500},3);
+            
+            g2d.setColor(Color.YELLOW);
+            g2d.fillRoundRect(670, 85, 100, 100, 10, 10);
+            
+            g2d.fillArc(800, 400, 150, 150, 0, 180);
+            
+            BufferedImage image;
+			try {
+				image = ImageIO.read(new File("src/buho/espada.png"));
+
+	            g2d.drawImage(image, 0, 0, null);
+	            
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+            }
+            
+	};
+	pane.setSize(1000,700);
+	pane.setLocation(0,0);
+	this.add(pane);
 	}
 }
