@@ -36,7 +36,6 @@ import javax.swing.JTextField;
 public class Ventana extends JFrame {
 
 	public Ventana() {
-
 		this.setSize(1000, 600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setMinimumSize(new Dimension(200, 200));
@@ -49,8 +48,7 @@ public class Ventana extends JFrame {
 		try {
 			Image iconImage = ImageIO.read(getClass().getResource("/buho/buho.png"));
 			this.setIconImage(iconImage);
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
 		}
 
 		JMenuBar barra = new JMenuBar();
@@ -75,16 +73,27 @@ public class Ventana extends JFrame {
 
 		this.setJMenuBar(barra);
 		
-		this.pintar();
-
+		this.router("login"); 
 		this.setVisible(true);
+	}
+	
+	public void router(String target) { 
+		this.getContentPane().removeAll();
+		
+		if (target.equalsIgnoreCase("login"))
+			this.login();
+		
+		if (target.equalsIgnoreCase("registro"))
+			this.registro(); 
+		
 		this.repaint();
+		this.revalidate();
 	}
 
 	public void login() {
 		JPanel login_container = new JPanel();
-		login_container.setSize(400, 400);
-		login_container.setLocation(50, 50);
+		login_container.setSize(400, 500);
+		login_container.setLocation(50, 20);
 		login_container.setBackground(Color.decode("#B979E8"));
 		login_container.setLayout(null);
 		this.add(login_container);
@@ -132,50 +141,60 @@ public class Ventana extends JFrame {
 		access_btn.setBounds(100, 350, 200, 40);
 		access_btn.setFont(new Font("Arial", Font.ITALIC, 18));
 		login_container.add(access_btn);
+		
+		JButton logBtn = new JButton();
+		logBtn.setText("ir a registro");
+		logBtn.setBounds(100,410,200,40);
+		logBtn.setFont(new Font("Arial",Font.ITALIC,18));
+		login_container.add(logBtn);
+
+		logBtn.addActionListener(e ->{
+			this.router("registro");
+		});
 	}
 
 	public void registro() {
 		JPanel rgs_container = new JPanel();
-		rgs_container.setBounds(500, 50, 400, 400);
+		rgs_container.setBounds(50, 20, 400, 500);
 		rgs_container.setOpaque(true);
 		rgs_container.setBackground(Color.green);
 		rgs_container.setLayout(null);
 		this.add(rgs_container);
 
 		JLabel bio_tag = new JLabel("BIO");
-		bio_tag.setBounds(50, 50, 300, 40);
+		bio_tag.setBounds(50, 20, 300, 30);
 		bio_tag.setHorizontalAlignment(JLabel.CENTER);
 		bio_tag.setOpaque(true);
 		rgs_container.add(bio_tag);
 
 		JTextArea bio_text = new JTextArea();
-		bio_text.setLocation(50, 100);
+		bio_text.setLocation(50, 60);
 		bio_text.setSize(300, 80);
 		rgs_container.add(bio_text);
 
 		JCheckBox opt_sweet = new JCheckBox("Dulce");
-		opt_sweet.setBounds(50, 200, 100, 40);
+		opt_sweet.setBounds(50, 150, 100, 30);
 		opt_sweet.setOpaque(true);
 		opt_sweet.setForeground(Color.red);
 		rgs_container.add(opt_sweet);
 
 		JCheckBox opt_salty = new JCheckBox("Salado");
-		opt_salty.setBounds(150, 200, 100, 40);
+		opt_salty.setBounds(150, 150, 100, 30);
 		opt_salty.setOpaque(true);
 		opt_salty.setForeground(Color.black);
 		rgs_container.add(opt_salty);
 
 		JCheckBox opt_healty = new JCheckBox("Saludable");
-		opt_healty.setBounds(250, 200, 100, 40);
+		opt_healty.setBounds(250, 150, 100, 30);
 		opt_healty.setOpaque(true);
 		rgs_container.add(opt_healty);
 
-		JRadioButton accept_terms = new JRadioButton("Acepto los términos");
-		accept_terms.setBounds(50, 260, 180, 40);
+		JRadioButton accept_terms = new JRadioButton("Acepto");
+		accept_terms.setBounds(50, 190, 140, 30);
 		rgs_container.add(accept_terms);
 
-		JRadioButton reject_terms = new JRadioButton("Rechazo los términos");
-		reject_terms.setBounds(220, 260, 200, 40);
+		JRadioButton reject_terms = new JRadioButton("Rechazo");
+		reject_terms.setBounds(210, 190, 140, 30);
 		rgs_container.add(reject_terms);
 
 		ButtonGroup terms = new ButtonGroup();
@@ -184,12 +203,22 @@ public class Ventana extends JFrame {
 
 		String[] colonias = { "Camino real", "Arcoiris", "Villas del encanto", "8 de octubre" };
 		JComboBox colonias_combo = new JComboBox(colonias);
-		colonias_combo.setBounds(50, 300, 300, 50);
+		colonias_combo.setBounds(50, 230, 300, 40);
 		rgs_container.add(colonias_combo);
 
 		JButton register_btn = new JButton("Crear cuenta");
-		register_btn.setBounds(50, 340, 300, 60);
+		register_btn.setBounds(50, 280, 300, 40);
 		rgs_container.add(register_btn);
+		
+		JButton logBtn = new JButton();
+		logBtn.setText("Ir a login");
+		logBtn.setBounds(100, 340, 200, 40);
+		logBtn.setFont(new Font("Arial", Font.ITALIC, 18));
+		rgs_container.add(logBtn); 
+
+		logBtn.addActionListener(e -> {
+			this.router("login"); 
+		});
 	}
 
 	public void users() {
@@ -213,201 +242,5 @@ public class Ventana extends JFrame {
 
 		panel_users.add(final_table);
 		panel_users.repaint();
-	}
-
-	public void calculadora_layout() {
-
-		JPanel panel_users = new JPanel();
-		panel_users.setSize(500, 500);
-		panel_users.setLocation(250, 50);
-		panel_users.setBackground(Color.decode("#2C3E50"));
-
-		BorderLayout mi_layout1 = new BorderLayout();
-		mi_layout1.setVgap(10);
-		mi_layout1.setHgap(10);
-
-		panel_users.setLayout(mi_layout1);
-		this.add(panel_users);
-
-		JLabel field = new JLabel("180.00");
-		field.setOpaque(true);
-		field.setBackground(Color.white);
-		field.setFont(new Font("Arial", Font.BOLD, 22));
-		field.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
-		panel_users.add(field, BorderLayout.NORTH);
-
-		JPanel centro = new JPanel();
-		centro.setBackground(Color.decode("#2D2D30"));
-		centro.setLayout(new GridLayout(4, 3, 5, 5));
-		panel_users.add(centro, BorderLayout.CENTER);
-
-		String[] botones = {"7", "8", "9", "4", "5", "6", "1", "2", "3", "0", ".", "C"};
-		for (String texto : botones) {
-			JButton btn = new JButton(texto);
-			btn.setFont(new Font("Arial", Font.BOLD, 18));
-			centro.add(btn);
-		}
-
-		JPanel sidebar = new JPanel();
-		sidebar.setBackground(Color.decode("#2D2D30"));
-		sidebar.setLayout(new GridLayout(6, 1, 5, 5));
-		panel_users.add(sidebar, BorderLayout.EAST);
-
-		String[] botones2 = {"+", "-", "x", "/", "=", "CE"};
-		for (int i = 0; i < botones2.length; i++) {
-			JButton ce = new JButton(botones2[i]);
-			ce.setFont(new Font("Arial", Font.BOLD, 22));
-			sidebar.add(ce);
-		}
-		
-		this.repaint();
-		this.revalidate();
-	}
-	
-	public void intereses() {
-
-		this.getContentPane().setLayout(new BorderLayout());
-
-		JLabel titulo = new JLabel("Calcular interes");
-		titulo.setHorizontalAlignment(JLabel.CENTER);
-		this.add(titulo, BorderLayout.NORTH);
-
-		JPanel datos = new JPanel();
-		datos.setBackground(Color.decode("#A8E6A3"));
-		datos.setLayout(new GridLayout(4,2));
-		datos.setBorder(BorderFactory.createTitledBorder("Calcular interes"));
-
-		JLabel capital = new JLabel("Capital:");
-		JTextField txtCapital = new JTextField();
-
-		JLabel tiempo = new JLabel("Tiempo:");
-		JTextField txtTiempo = new JTextField();
-
-		JLabel tasa = new JLabel("Tasa interes:");
-		JTextField txtTasa = new JTextField();
-
-		datos.add(capital);
-		datos.add(txtCapital);
-		datos.add(tiempo);
-		datos.add(txtTiempo);
-		datos.add(tasa);
-		datos.add(txtTasa);
-
-		JPanel botones = new JPanel();
-		botones.setLayout(new FlowLayout());
-
-		JButton calcular = new JButton("Calcular");
-		JButton cancelar = new JButton("Cancelar");
-
-		botones.add(calcular);
-		botones.add(cancelar);
-
-		datos.add(botones);
-
-		this.add(datos, BorderLayout.CENTER);
-
-		JPanel resultados = new JPanel();
-		resultados.setBackground(new Color(255, 200, 200));
-		resultados.setLayout(new GridLayout(2,2));
-		resultados.setBorder(BorderFactory.createTitledBorder("Resultados"));
-
-		JLabel interes = new JLabel("Interes:");
-		JTextField txtInteres = new JTextField();
-		txtInteres.setEditable(false);
-
-		JLabel monto = new JLabel("Monto:");
-		JTextField txtMonto = new JTextField();
-		txtMonto.setEditable(false);
-
-		resultados.add(interes);
-		resultados.add(txtInteres);
-		resultados.add(monto);
-		resultados.add(txtMonto);
-
-		this.add(resultados, BorderLayout.SOUTH);
-
-		calcular.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				double c = Double.parseDouble(txtCapital.getText());
-				double t = Double.parseDouble(txtTiempo.getText());
-				double r = Double.parseDouble(txtTasa.getText());
-
-				double i = c * r * t;
-				double m = c + i;
-
-				txtInteres.setText("" + i);
-				txtMonto.setText("" + m);
-			}
-		});
-
-		cancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				txtCapital.setText("");
-				txtTiempo.setText("");
-				txtTasa.setText("");
-				txtInteres.setText("");
-				txtMonto.setText("");
-			}
-		});
-	}
-	
-	public void pintar() {
-		JPanel pane = new JPanel() {
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            
-            Graphics2D g2d = (Graphics2D) g;
-            
-            g.drawLine(0, 0, 1000, 600);
-            
-            g2d.setStroke(new BasicStroke(5));
-            g2d.setColor(Color.MAGENTA);
-            g2d.drawOval(100, 100, 150, 50);
-            
-            g2d.setStroke(new BasicStroke(7));
-            g2d.setColor(Color.GREEN);
-            g2d.drawPolygon(new int[] {300,100,400}, new int[] {100,300,200},3);
-            
-            g2d.setColor(Color.CYAN);
-            g2d.drawRect(250, 270, 100, 100);
-            
-            g2d.setColor(Color.ORANGE);
-            g2d.drawRoundRect(400, 150, 100, 100, 10, 10);
-            
-            g2d.setColor(Color.RED);
-            g2d.drawArc(700, 300, 150, 150, 0, 360);
-            
-            g2d.setFont(new Font("Arial",Font.BOLD,22));
-            g2d.drawString("hola", 100, 100);
-            
-            g2d.setColor(Color.BLUE);
-            g2d.fillOval(500, 100, 150, 50);
-            
-            g2d.setColor(Color.PINK);
-            g2d.fillPolygon(new int[] {500,300,700}, new int[] {300,400,500},3);
-            
-            g2d.setColor(Color.YELLOW);
-            g2d.fillRoundRect(670, 85, 100, 100, 10, 10);
-            
-            g2d.fillArc(800, 400, 150, 150, 0, 180);
-            
-            BufferedImage image;
-			try {
-				image = ImageIO.read(new File("src/buho/espada.png"));
-
-	            g2d.drawImage(image, 0, 0, null);
-	            
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-            }
-            
-	};
-	pane.setSize(1000,700);
-	pane.setLocation(0,0);
-	this.add(pane);
 	}
 }
