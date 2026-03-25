@@ -32,14 +32,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 public class Ventana extends JFrame {
 
 	public Ventana() {
-		this.setSize(1000, 600);
+		this.setSize(1000, 750);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setMinimumSize(new Dimension(200, 200));
-		this.setMaximumSize(new Dimension(900, 700));
+		this.setMaximumSize(new Dimension(1100, 800));
 		this.setLocationRelativeTo(null);
 		this.setTitle("Hola");
 		this.setLayout(null);
@@ -73,7 +74,8 @@ public class Ventana extends JFrame {
 
 		this.setJMenuBar(barra);
 		
-		this.router("login"); 
+		/*this.router("login")*/ 
+		this.router("factura");
 		this.setVisible(true);
 	}
 	
@@ -85,6 +87,9 @@ public class Ventana extends JFrame {
 		
 		if (target.equalsIgnoreCase("registro"))
 			this.registro(); 
+		
+		if (target.equalsIgnoreCase("factura"))
+			this.factura();
 		
 		this.repaint();
 		this.revalidate();
@@ -242,5 +247,84 @@ public class Ventana extends JFrame {
 
 		panel_users.add(final_table);
 		panel_users.repaint();
+	}
+
+	public void factura() {
+		JPanel p1 = new JPanel();
+		p1.setBounds(10, 10, 900, 650);
+		p1.setLayout(null); 
+		this.add(p1);
+
+		JLabel tit = new JLabel("Factura en Java - POO y ArrayList");
+		tit.setBounds(10, 5, 400, 20);
+		p1.add(tit);
+
+		
+		JLabel sub1 = new JLabel("Datos del cliente");
+		sub1.setBounds(15, 30, 150, 20);
+		p1.add(sub1);
+
+		p1.add(new JLabel("ID:")).setBounds(20, 55, 30, 20);
+		p1.add(new JTextField("123456")).setBounds(50, 55, 90, 20);
+		
+		p1.add(new JLabel("Nombre:")).setBounds(160, 55, 60, 20);
+		p1.add(new JTextField("Jhon Doe")).setBounds(220, 55, 180, 20);
+		
+		p1.add(new JLabel("Dir:")).setBounds(20, 85, 30, 20);
+		p1.add(new JTextField("Calle 1 # 123")).setBounds(50, 85, 120, 20);
+		
+		p1.add(new JLabel("Tel:")).setBounds(185, 85, 40, 20);
+		p1.add(new JTextField("5554433")).setBounds(220, 85, 120, 20);
+
+		
+		JLabel sub2 = new JLabel("Datos factura");
+		sub2.setBounds(450, 30, 100, 20);
+		p1.add(sub2);
+		
+		p1.add(new JLabel("N Fact:")).setBounds(460, 55, 50, 20);
+		p1.add(new JLabel("1")).setBounds(520, 55, 50, 20);
+		
+		p1.add(new JLabel("Fecha:")).setBounds(460, 85, 50, 20);
+		p1.add(new JLabel("2021/50/21")).setBounds(520, 85, 100, 20);
+
+	
+		JButton btn1 = new JButton("Ver lista");
+		btn1.setBounds(15, 130, 100, 25);
+		p1.add(btn1);
+		
+		JButton btn2 = new JButton("Añadir");
+		btn2.setBounds(500, 130, 80, 25);
+		p1.add(btn2);
+		
+		JButton btn3 = new JButton("Eliminar");
+		btn3.setBounds(590, 130, 90, 25);
+		p1.add(btn3);
+
+		
+		String[] c = {"Prod", "Cant", "Val", "Sub"};
+		Object[][] d = {{"Agua", "2", "500", "1000.0"},{"Cereal", "5", "1000", "5000.0"},{"Leche", "2", "300", "600.0"}};
+		JTable t1 = new JTable(new DefaultTableModel(d, c));
+		JScrollPane sp1 = new JScrollPane(t1);
+		sp1.setBounds(15, 165, 670, 150);
+		p1.add(sp1);
+
+		
+		p1.add(new JLabel("SubTotal: 6600.0")).setBounds(20, 330, 150, 20);
+		
+		p1.add(new JLabel("% Desc:")).setBounds(20, 355, 60, 20);
+		p1.add(new JTextField("5")).setBounds(80, 355, 30, 20);
+		p1.add(new JCheckBox()).setBounds(115, 355, 25, 20);
+		
+		p1.add(new JLabel("IVA 19%: 1254.0")).setBounds(20, 380, 150, 20);
+		p1.add(new JLabel("TOTAL: 7524.0")).setBounds(20, 410, 150, 20);
+
+		
+		JButton btn4 = new JButton("Finalizar");
+		btn4.setBounds(500, 450, 90, 30);
+		p1.add(btn4);
+		
+		JButton btn5 = new JButton("Limpiar");
+		btn5.setBounds(600, 450, 80, 30);
+		p1.add(btn5);
 	}
 }
