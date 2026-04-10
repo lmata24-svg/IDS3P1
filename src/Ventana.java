@@ -71,11 +71,16 @@ public class Ventana extends JFrame {
 		menu2.add(opt4);
 		JMenuItem opt5 = new JMenuItem("Nuevo");
 		menu2.add(opt5);
-
-		this.setJMenuBar(barra);
 		
-		/*this.router("login")*/ 
-		this.router("factura");
+		JMenuBar barra2 = new JMenuBar();
+		JMenu menu3 = new JMenu("ayuda");
+		barra2.add(menu3);
+		
+		this.setJMenuBar(barra);
+		this.setJMenuBar(barra2);
+		
+		this.router("login");
+		/*this.router("factura");*/
 		this.setVisible(true);
 	}
 	
@@ -90,6 +95,7 @@ public class Ventana extends JFrame {
 		
 		if (target.equalsIgnoreCase("factura"))
 			this.factura();
+
 		
 		this.repaint();
 		this.revalidate();
