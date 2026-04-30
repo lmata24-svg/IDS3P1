@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import javax.swing.ImageIcon;
 
 public class Memorice extends JFrame {
 
@@ -48,39 +49,51 @@ public class Memorice extends JFrame {
         panel_2.setLayout(new GridLayout(3, 4, 5, 5));
         
         JButton btnNewButton_2 = new JButton();
+        btnNewButton_2.setIcon(new ImageIcon(Memorice.class.getResource("/buho/Memorice/1.png")));
         panel_2.add(btnNewButton_2);
         
         JButton btnNewButton_3 = new JButton();
+        btnNewButton_3.setIcon(new ImageIcon(Memorice.class.getResource("/buho/Memorice/1.png")));
         panel_2.add(btnNewButton_3);
         
         JButton btnNewButton_4 = new JButton();
+        btnNewButton_4.setIcon(new ImageIcon(Memorice.class.getResource("/buho/Memorice/1.png")));
         panel_2.add(btnNewButton_4);
         
         JButton btnNewButton_8 = new JButton();
+        btnNewButton_8.setIcon(new ImageIcon(Memorice.class.getResource("/buho/Memorice/1.png")));
         panel_2.add(btnNewButton_8);
         
         JButton btnNewButton_6 = new JButton();
+        btnNewButton_6.setIcon(new ImageIcon(Memorice.class.getResource("/buho/Memorice/1.png")));
         panel_2.add(btnNewButton_6);
         
         JButton btnNewButton_11 = new JButton();
+        btnNewButton_11.setIcon(new ImageIcon(Memorice.class.getResource("/buho/Memorice/1.png")));
         panel_2.add(btnNewButton_11);
         
         JButton btnNewButton_5 = new JButton();
+        btnNewButton_5.setIcon(new ImageIcon(Memorice.class.getResource("/buho/Memorice/1.png")));
         panel_2.add(btnNewButton_5);
         
         JButton btnNewButton_7 = new JButton();
+        btnNewButton_7.setIcon(new ImageIcon(Memorice.class.getResource("/buho/Memorice/1.png")));
         panel_2.add(btnNewButton_7);
         
         JButton btnNewButton_9 = new JButton();
+        btnNewButton_9.setIcon(new ImageIcon(Memorice.class.getResource("/buho/Memorice/1.png")));
         panel_2.add(btnNewButton_9);
         
         JButton btnNewButton_10 = new JButton();
+        btnNewButton_10.setIcon(new ImageIcon(Memorice.class.getResource("/buho/Memorice/1.png")));
         panel_2.add(btnNewButton_10);
         
         JButton btnNewButton_12 = new JButton();
+        btnNewButton_12.setIcon(new ImageIcon(Memorice.class.getResource("/buho/Memorice/1.png")));
         panel_2.add(btnNewButton_12);
         
         JButton btnNewButton_13 = new JButton();
+        btnNewButton_13.setIcon(new ImageIcon(Memorice.class.getResource("/buho/Memorice/1.png")));
         panel_2.add(btnNewButton_13);
 
         this.setVisible(true);
@@ -89,4 +102,4 @@ public class Memorice extends JFrame {
     public static void main(String[] args) {
         new Memorice();
     }
-}
+} 
